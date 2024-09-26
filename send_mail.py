@@ -13,7 +13,7 @@ password = 'yoht tyth ktqd xese'  # Your Gmail App Password
 
 # WordPress REST API URL
 wp_site_url = 'http://localhost/wordpress'
-rest_api_url = f'{wp_site_url}/wp-json/wp/v2/users'
+rest_api_url = f'http://localhost/wordpress/wp-json/wp/v2/users'
 
 # Create a Faker instance for generating dummy data
 fake = Faker()
@@ -25,8 +25,18 @@ def send_email(to_email, to_name):
     msg['To'] = to_email
     msg['Subject'] = 'Test Email Subject'
     
-    # HTML content
-    body = f'This is a test email sent to <b>{to_name}</b>!'
+    # HTML content with default banner
+    banner_url = 'https://yourwebsite.com/path/to/banner.jpg'  # Replace with your banner URL
+    body = f'''
+    <html>
+        <body>
+            <div style="text-align:center;">
+                <img src="{banner_url}" alt="Banner" style="width:100%; max-width:600px; height:auto;" />
+            </div>
+            <p>This is a test email sent to <b>{to_name}</b>!</p>
+        </body>
+    </html>
+    '''
     msg.attach(MIMEText(body, 'html'))
     
     try:
